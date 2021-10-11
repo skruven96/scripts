@@ -15,4 +15,5 @@ jobs:
         wget "https://github.com/skruven96/linux/archive/$id.zip"
         unzip "./$id.zip"
         cd scripts
+        ./install-deps.sh
         ./build-linux.sh ../linux-$id tinyconfig    
