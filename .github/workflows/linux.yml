@@ -14,7 +14,7 @@ jobs:
         $ssh=$(git rev-parse HEAD:linux)
         wget "https://github.com/skruven96/linux/archive/$ssh.zip"
         unzip "./$ssh.zip" -d ./linux
-     - name: "Compiling"
-     - run: |
+    - name: "Compiling"
+    - run: |
         cd scripts
         ./build-linux.sh ../linux tinyconfig    
