@@ -13,10 +13,11 @@ jobs:
         newid=$(git rev-parse ${{ github.event.after }}:linux)
         echo "newid=$newid" >> $GITHUB_ENV
         echo "oldid=$oldid" >> $GITHUB_ENV
-    - name: "Downloading dependencies"
+    - name: "Download and compile linux"
       if: ${{ env.oldid != env.newid }}
       run: |
+        cd ..
         wget "https://github.com/skruven96/linux/archive/${{ env.newid }}.zip"
         unzip "./${{ env.newid }}.zip" -d linux
-        ls
-        ./build-linux.sh linux tinyconfig    
+        cd scripts
+        ./build-linux.sh ../linux tinyconfig    
