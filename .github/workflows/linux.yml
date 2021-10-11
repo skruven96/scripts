@@ -2,7 +2,7 @@ name: Sanitize-linux-build
 on:
   push:
     paths:
-    - 'linux/.git/**'
+    - 'linux/**'
 jobs:
   build-linux:
     runs-on: ubuntu-20.04
