@@ -17,6 +17,6 @@ jobs:
       if: ${{ env.oldid != env.newid }}
       run: |
         wget "https://github.com/skruven96/linux/archive/${{ env.newid }}.zip"
-        unzip "./${{ env.newid }}.zip" -d ./../linux
+        unzip "./${{ env.newid }}.zip" -d linux
         ls
-        ./build-linux.sh ../linux tinyconfig    
+        ./build-linux.sh linux tinyconfig    
