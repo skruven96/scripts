@@ -1,0 +1,10 @@
+name: Sanitize-linux-repo
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        submodules: true
+      - run: ./scripts/build-linux.sh ./scripts/linux
+
