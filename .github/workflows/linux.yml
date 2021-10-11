@@ -17,6 +17,6 @@ jobs:
         wget "https://github.com/skruven96/linux/archive/$ssh.zip"
         unzip "./$ssh.zip" -d ./linux
     - name: "Compiling"
-    - run: |
+      run: |
         cd scripts
         ./build-linux.sh ../linux tinyconfig    
