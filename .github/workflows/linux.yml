@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      fetch-depth: 0
+      with: 
+        fetch-depth: 0
     - name:  "Check sub module update"
       run: |
         oldid=$(git rev-parse ${{ github.event.before }}:linux)
