@@ -1,22 +1,21 @@
 name: Sanitize-linux-build
-on:
-  push:
-    paths:
-    - 'linux/**'
+on: push
 jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: "Downloading dependencies"
+    - name:  "Check sub module update"
       run: |
-        sudo apt install unzip
-    - name: "Downloading"
+        $oldid=$(git rev-parse HEAD~1:linux)
+        $newid=$(git rev-parse HEAD~0:linux)
+        echo "newid=$newid" >> $GITHUB_ENV
+        echo "oldid=$oldid" >> $GITHUB_ENV
+    - name: "Downloading dependencies"
+      if: ${{ env.oldid != env.newid }}
       run: |
         $ssh=$(git rev-parse HEAD:linux)
         wget "https://github.com/skruven96/linux/archive/$ssh.zip"
         unzip "./$ssh.zip" -d ./linux
-    - name: "Compiling"
-      run: |
         cd scripts
         ./build-linux.sh ../linux tinyconfig    
