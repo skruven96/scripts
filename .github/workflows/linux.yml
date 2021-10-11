@@ -16,7 +16,7 @@ jobs:
     - name: "Downloading dependencies"
       if: ${{ env.oldid != env.newid }}
       run: |
-        wget "https://github.com/skruven96/linux/archive/${{ github.event.after }}.zip"
-        unzip "./${{ github.event.after }}.zip" -d ./linux
+        wget "https://github.com/skruven96/linux/archive/${{ env.newid }}.zip"
+        unzip "./${{ env.newid }}.zip" -d ./linux
         cd scripts
         ./build-linux.sh ../linux tinyconfig    
