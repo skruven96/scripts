@@ -1,5 +1,8 @@
 name: Sanitize-linux-build
-on: push
+on: 
+  push:
+    paths:
+    - "linux"
 jobs:
   build-linux:
     runs-on: ubuntu-latest
