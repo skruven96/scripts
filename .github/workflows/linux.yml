@@ -1,10 +1,20 @@
-name: Sanitize-linux-repo
-on: push
+name: Sanitize-linux-build
+on:
+  push:
+    paths:
+      - 'linux/.git/**'
 jobs:
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        submodules: true
-      - run: ./scripts/build-linux.sh ./scripts/linux
-
+  build_linux:
+    - uses: actions/checkout@v2
+    - name: "Downloading dependencies"
+      run: |
+        sudo apt install unzip
+    - name: "Downloading"
+      run: |
+        $ssh=$(git rev-parse HEAD:linux)
+        wget "https://github.com/skruven96/linux/archive/$ssh.zip"
+        unzip "./$ssh.zip" -d ./linux
+     - name: "Compiling"
+     - run: |
+        cd scripts
+        ./build-linux.sh ../linux tinyconfig    
