@@ -2,19 +2,19 @@ name: Sanitize-linux-build
 on:
   push:
     paths:
-      - 'linux/.git/**'
+    - 'linux/.git/**'
 jobs:
   build_linux:
-    - uses: actions/checkout@v2
-    - name: "Downloading dependencies"
-      run: |
-        sudo apt install unzip
-    - name: "Downloading"
-      run: |
-        $ssh=$(git rev-parse HEAD:linux)
-        wget "https://github.com/skruven96/linux/archive/$ssh.zip"
-        unzip "./$ssh.zip" -d ./linux
-    - name: "Compiling"
-    - run: |
-        cd scripts
-        ./build-linux.sh ../linux tinyconfig    
+  - uses: actions/checkout@v2
+  - name: "Downloading dependencies"
+    run: |
+      sudo apt install unzip
+  - name: "Downloading"
+    run: |
+      $ssh=$(git rev-parse HEAD:linux)
+      wget "https://github.com/skruven96/linux/archive/$ssh.zip"
+      unzip "./$ssh.zip" -d ./linux
+  - name: "Compiling"
+  - run: |
+      cd scripts
+      ./build-linux.sh ../linux tinyconfig    
