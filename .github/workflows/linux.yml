@@ -5,10 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      fetch-depth: 0
     - name:  "Check sub module update"
       run: |
-        oldid=$(git rev-parse HEAD~1:linux)
-        newid=$(git rev-parse HEAD~0:linux)
+        oldid=$(git rev-parse ${{ github.event.before }}:linux)
+        newid=$(git rev-parse ${{ github.event.after }}:linux)
         echo "newid=$newid" >> $GITHUB_ENV
         echo "oldid=$oldid" >> $GITHUB_ENV
     - name: "Downloading dependencies"
