@@ -10,5 +10,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: "Compiling"
       run: |
-        cd test
         make -C test    
