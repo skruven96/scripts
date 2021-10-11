@@ -8,19 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with: 
-        fetch-depth: 0
-    - name:  "Check sub module update"
-      run: |
-        oldid=$(git rev-parse ${{ github.event.before }}:linux)
-        newid=$(git rev-parse ${{ github.event.after }}:linux)
-        echo "newid=$newid" >> $GITHUB_ENV
-        echo "oldid=$oldid" >> $GITHUB_ENV
     - name: "Download and compile linux"
-      if: ${{ env.oldid != env.newid }}
       run: |
+        id=$(git rev-parse HEAD:linux)
         cd ..
-        wget "https://github.com/skruven96/linux/archive/${{ env.newid }}.zip"
-        unzip "./${{ env.newid }}.zip" -d linux
+        wget "https://github.com/skruven96/linux/archive/$id.zip"
+        unzip "./$id.zip"
         cd scripts
-        ./build-linux.sh ../linux tinyconfig    
+        ./build-linux.sh ../linux-$id tinyconfig    
