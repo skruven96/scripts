@@ -1,0 +1,13 @@
+name: Sanitize-test-build
+on:
+  push:
+    paths:
+    - 'test/**'
+jobs:
+  build-tests:
+    steps:
+    - uses: actions/checkout@v2
+    - name: "Compiling"
+      run: |
+        cd tests
+        make -C test    
